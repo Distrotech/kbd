@@ -3,6 +3,7 @@
 
 AC_PREREQ(2.59)
 AC_INIT(kbd, 1.14, gladkov.alexey@gmail.com)
+AM_INIT_AUTOMAKE(dist-bzip2)
 AC_CONFIG_SRCDIR([src/showkey.c])
 AC_CONFIG_HEADERS(config.h)
 
@@ -45,22 +46,21 @@ AC_CHECK_FUNCS([alarm memset setlocale strcasecmp strchr strdup strerror \
 strspn strstr strtol strtoul])
 
 case $host_cpu in
-	m68*|sparc*) KEYCODES_PROGS= ;;
-	*)           KEYCODES_PROGS=yes ;;
+	m68*|sparc*) KEYCODES_PROGS=no;;
+	*)           KEYCODES_PROGS=yes;;
 esac
-AC_SUBST(KEYCODES_PROGS)
+AM_CONDITIONAL(KEYCODES_PROGS, test "$KEYCODES_PROGS" = "yes")
 
 case $host_cpu in
-	i?86*) RESIZECONS_PROGS=yes ;;
-	*)     RESIZECONS_PROGS= ;;
+	i?86*) RESIZECONS_PROGS=yes;;
+	*)     RESIZECONS_PROGS=no;;
 esac
-AC_SUBST(RESIZECONS_PROGS)
+AM_CONDITIONAL(RESIZECONS_PROGS, test "$RESIZECONS_PROGS" = "yes")
 
 AC_ARG_ENABLE(optional-progs,
 	AS_HELP_STRING(--enable-optional-progs, [Build and install a optional programs]),
 	[OPTIONAL_PROGS=$enableval],[OPTIONAL_PROGS=no])
-
-AC_SUBST(OPTIONAL_PROGS)
+AM_CONDITIONAL(OPTIONAL_PROGS, test "$OPTIONAL_PROGS" = "yes")
 
 # For lib/nls.h: do we have <libintl.h> and gettext() ?
 
@@ -87,6 +87,16 @@ AC_SUBST(HAVE_XGETTEXT)
 AC_CONFIG_FILES([Makefile
 		data/Makefile
 		man/Makefile
+		man/man1/Makefile
+		man/man1/dumpkeys.1
+		man/man1/loadkeys.1
+		man/man1misc/Makefile
+		man/man5/Makefile
+		man/man8/Makefile
+		man/man8/setfont.8
+		man/man8/loadunimap.8
+		man/man8/mapscrn.8
+		man/man8misc/Makefile
 		po/Makefile
 		src/Makefile])
 AC_OUTPUT
