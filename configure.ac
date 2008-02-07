@@ -88,14 +88,9 @@ AC_CONFIG_FILES([Makefile
 		data/Makefile
 		man/Makefile
 		man/man1/Makefile
-		man/man1/dumpkeys.1
-		man/man1/loadkeys.1
 		man/man1misc/Makefile
 		man/man5/Makefile
 		man/man8/Makefile
-		man/man8/setfont.8
-		man/man8/loadunimap.8
-		man/man8/mapscrn.8
 		man/man8misc/Makefile
 		po/Makefile
 		src/Makefile])
