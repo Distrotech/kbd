@@ -1,3 +1,8 @@
+Changes for 1.15 (legion)
+
+o Build system:
+  - Use automake for build system.
+
 Changes for 1.14.1 (legion)
 
 o Build system:
